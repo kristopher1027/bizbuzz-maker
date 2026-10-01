@@ -1,73 +1,103 @@
-# Welcome to your Lovable project
+# DataFlow
 
-## Project info
+DataFlow is a modern web platform for selling mobile data bundles, airtime top-ups, and utility payments (electricity, cable TV, exam pins, and water bills). It offers a clean storefront for customers with wallet-based payments and instant delivery across all major networks.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Features
 
-## How can I edit this code?
+- **Mobile Data Sales** — Purchase data bundles for MTN, Airtel, Glo, and 9mobile with transparent per-network pricing
+- **Airtime Top-Up** — Recharge any phone number instantly
+- **Utility Payments** — Electricity bills, cable TV subscriptions (DSTV, GOtv, StarTimes), exam pins, and water bills
+- **User Authentication** — Secure sign-up and sign-in powered by Lovable Cloud
+- **Wallet System** — Fund a wallet once, then pay for multiple services without re-entering card details
+- **Transaction History** — Every purchase is recorded with amount, service type, reference, and status
+- **Responsive Design** — Optimized for desktop, tablet, and mobile
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+| Layer      | Technology                                        |
+| ---------- | ------------------------------------------------- |
+| Frontend   | React 18, TypeScript 5, Vite 5                    |
+| Styling    | Tailwind CSS v3, shadcn/ui components             |
+| Fonts      | Space Grotesk (headings), Inter (body)            |
+| Backend    | Lovable Cloud (managed database, auth, storage)   |
+| Security   | Row-Level Security policies on all tables         |
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 18 or newer (or Bun)
+- npm (or bun)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# 1. Clone the repository
 git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 2. Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 3. Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app runs at `http://localhost:8080` by default.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Environment
 
-**Use GitHub Codespaces**
+Backend connection details are managed by Lovable Cloud and injected automatically. The following variables must be present in `.env` (already configured for this project):
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `VITE_SUPABASE_PROJECT_ID`
 
-## What technologies are used for this project?
+## Available Scripts
 
-This project is built with:
+| Command           | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `npm run dev`     | Start the dev server with hot reload         |
+| `npm run build`   | Create a production build                    |
+| `npm run preview` | Preview the production build locally         |
+| `npm run lint`    | Run ESLint                                   |
+| `npm test`        | Run the test suite (Vitest)                  |
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Project Structure
 
-## How can I deploy this project?
+```
+src/
+├── components/        # UI sections (Hero, Services, Pricing, etc.)
+│   └── ui/            # shadcn/ui primitives
+├── pages/             # Route pages (Index, NotFound)
+├── hooks/             # Custom React hooks
+├── integrations/      # Backend client (auto-generated)
+├── lib/               # Utilities
+└── index.css          # Design tokens and theme
+supabase/
+└── migrations/        # Database schema (profiles, wallets, transactions)
+```
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Database Schema
 
-## Can I connect a custom domain to my Lovable project?
+- **profiles** — User profile information (name, phone, email)
+- **wallets** — Per-user wallet balance in NGN
+- **transactions** — Credits and debits with type, status, service type, and unique reference
 
-Yes, you can!
+All tables use Row-Level Security so users can only read and write their own data. New accounts automatically receive a profile and a zero-balance wallet on sign-up.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Roadmap
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- [ ] Data purchase flow (network selection → phone input → payment)
+- [ ] User dashboard with wallet funding and transaction history
+- [ ] Admin panel for managing pricing
+- [ ] Payment gateway integration for wallet top-ups
+- [ ] Mobile app (PWA)
+
+## Deployment
+
+Open the project in [Lovable](https://lovable.dev) and click **Share → Publish**. To use a custom domain, go to **Project Settings → Domains**.
+
+## License
+
+All rights reserved © 2026 DataFlow.
